@@ -12,6 +12,7 @@ function WriteScreen({route}) {
   const [title, setTitle] = useState(log?.title ?? '');
   const [body, setBody] = useState(log?.body ?? '');
   const navigation = useNavigation();
+  const [date, setDate] = useState(log ? new Date(log.date) : new Date());
 
   const {onCreate, onModify, onRemove} = useContext(LogContext);
 
@@ -40,7 +41,7 @@ function WriteScreen({route}) {
     if (log) {
       onModify({
         id: log.id,
-        date: log.date,
+        date: date.toISOString(),
         title,
         body,
       });
@@ -48,8 +49,7 @@ function WriteScreen({route}) {
       onCreate({
         title,
         body,
-        // 날짜를 문자열로 변환
-        date: new Date().toISOString(),
+        date: date.toISOString(),
       });
     }
     navigation.pop();
@@ -64,6 +64,8 @@ function WriteScreen({route}) {
           onSave={onSave}
           onAskRemove={onAskRemove}
           isEditing={!!log}
+          date={date}
+          onChangeDate={setDate}
         />
 
         <WriteEditor
