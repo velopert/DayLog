@@ -13,6 +13,7 @@
     "@react-navigation/bottom-tabs": "^6.0.4",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.0.5",
+    "date-fns": "^2.23.0",
     "react": "17.0.1",
     "react-native": "0.64.2",
     "react-native-get-random-values": "^1.7.0",
