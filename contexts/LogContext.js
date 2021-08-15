@@ -25,8 +25,15 @@ export function LogContextProvider({children}) {
     };
     setLogs([log, ...logs]);
   };
+
+  const onModify = modified => {
+    // logs 배열을 순회해 id가 일치하면 log를 교체하고 그렇지 않으면 유지
+    const nextLogs = logs.map(log => (log.id === modified.id ? modified : log));
+    setLogs(nextLogs);
+  };
+
   return (
-    <LogContext.Provider value={{logs, onCreate}}>
+    <LogContext.Provider value={{logs, onCreate, onModify}}>
       {children}
     </LogContext.Provider>
   );
